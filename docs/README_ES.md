@@ -25,10 +25,10 @@
   <a href="https://www.python.org/" style="margin-right: 20px; text-decoration:none;">
     <img src="https://img.shields.io/badge/python-3.10%2B-blue.svg" alt="Python Version" />
   </a>
-  <a href="https://github.com/AndrewTeleco/tic_tac_toe/actions/workflows/python-app.yml" style="margin-right: 20px; text-decoration:none;">
-    <img src="https://github.com/AndrewTeleco/tic_tac_toe/actions/workflows/python-app.yml/badge.svg" alt="Build Status" />
+  <a href="https://github.com/AndrewTeleco/tic_tac_toe_ai/actions/workflows/python-app.yml" style="margin-right: 20px; text-decoration:none;">
+    <img src="https://github.com/AndrewTeleco/tic_tac_toe_ai/actions/workflows/python-app.yml/badge.svg" alt="Build Status" />
   </a>
-  <a href="https://github.com/AndrewTeleco/tic_tac_toe" style="text-decoration:none;">
+  <a href="https://github.com/AndrewTeleco/tic_tac_toe_ai" style="text-decoration:none;">
     <img src="https://img.shields.io/badge/Open%20Source-Yes-brightgreen.svg" alt="Open Source" />
   </a>
 </p>
@@ -309,7 +309,7 @@ Este diagrama muestra los controles dentro del panel de configuración, incluyen
 ### Instalación:
 
 ```bash
-git clone https://github.com/AndrewTeleco/tic_tac_toe.git
+git clone https://github.com/AndrewTeleco/tic_tac_toe_ai.git
 cd tic_tac_toe
 pip install -r requirements.txt  # Opcional, sólo si agregas dependencias
 
@@ -366,8 +366,8 @@ R: Los logs se guardan en archivos .md dentro de la carpeta /data/logs.
 Eso me ayuda a seguir creando proyectos de calidad y es un buen apoyo para seguir creciendo.
 
 <p align="center">
-  <a href="https://github.com/AndrewTeleco/tic_tac_toe" target="_blank">
-    <img src="https://img.shields.io/github/stars/AndrewTeleco/tic_tac_toe?style=social" alt="GitHub Repo Stars"/>
+  <a href="https://github.com/AndrewTeleco/tic_tac_toe_ai" target="_blank">
+    <img src="https://img.shields.io/github/stars/AndrewTeleco/tic_tac_toe_ai?style=social" alt="GitHub Repo Stars">
   </a>
 </p>
 
