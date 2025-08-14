@@ -1,29 +1,37 @@
-name: Python application
+name: Python CI
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
-    branches: ["main"]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        python-version: [3.11]
+
     steps:
+      # 1️⃣ Checkout the repository
       - uses: actions/checkout@v3
 
-      - name: Set up Python 3.11
+      # 2️⃣ Set up Python environment
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: ${{ matrix.python-version }}
 
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pytest
 
+      # 4️⃣ Run tests with correct PYTHONPATH
       - name: Run tests
         run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)/tic_tac_toe
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
           pytest tic_tac_toe/tests -v
