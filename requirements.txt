@@ -4,3 +4,5 @@
 # Example (uncomment if you add any of these):
 # numpy
 # pillow
+
+pytest
