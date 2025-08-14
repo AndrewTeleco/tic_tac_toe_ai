@@ -148,42 +148,55 @@ This module handles user login and credentials setup, ensuring valid player iden
 ## 📐 Project Structure
 
 ```
-tic_tac_toe/
+TIC_TAC_TOE_GAME/          # Root of the project
 │
-├── ai/              # AI logic and player ranking
-│   ├── ai_player.py
-│   └── ranking_top_players.py
+├── LICENSE                # License file
+├── README.md              # Main README
+├── main.py                # Application entry point
+├── .gitignore             # Git ignore rules
+├── requirements.txt       # Python dependencies (optional)
 │
-├── core/            # Core logic, helpers, enums, constants, logging
-│   ├── enums.py
-│   ├── helper_classes.py
-│   ├── helper_methods.py
-│   ├── literals.py
-│   ├── log_game.py
-│   ├── logic_game.py
-│   └── paths.py
+├── tic_tac_toe/           # Main package
+│   ├── __init__.py        # Makes this a Python package
+│   │
+│   ├── ai/                # AI logic and player ranking
+│   │   ├── __init__.py
+│   │   ├── ai_player.py
+│   │   └── ranking_top_players.py
+│   │
+│   ├── core/              # Core logic, helpers, enums, constants, logging
+│   │   ├── __init__.py
+│   │   ├── enums.py
+│   │   ├── helper_classes.py
+│   │   ├── helper_methods.py
+│   │   ├── literals.py
+│   │   ├── log_game.py
+│   │   ├── logic_game.py
+│   │   └── paths.py
+│   │
+│   ├── data/              # Persistent data and logs
+│   │   ├── credentials.shlv
+│   │   ├── ranking_top_players.shlv
+│   │   └── logs/
+│   │
+│   ├── gui/               # GUI modules and main window
+│   │   ├── __init__.py
+│   │   ├── board_game.py
+│   │   ├── buttons_panel.py
+│   │   ├── difficulty_panel.py
+│   │   ├── display_game.py
+│   │   └── tic_tac_toe_game.py
+│   │
+│   └── user_config/       # User credentials management
+│       ├── __init__.py
+│       ├── Animals.md
+│       ├── Colors.md
+│       ├── user_credentials_callbacks.py
+│       ├── user_credentials_gui.py
+│       ├── user_credentials_storage.py
+│       └── user_credentials_validator.py
 │
-├── data/            # Persistent data and logs
-│   ├── credentials.shlv
-│   ├── ranking_top_players.shlv
-│   └── logs/
-│
-├── gui/             # GUI modules and main window
-│   ├── board_game.py
-│   ├── buttons_panel.py
-│   ├── difficulty_panel.py
-│   ├── display_game.py
-│   └── tic_tac_toe_game.py
-│
-├── user_config/     # User credentials management
-│   ├── Animals.md
-│   ├── Colors.md
-│   ├── user_credentials_callbacks.py
-│   ├── user_credentials_gui.py
-│   ├── user_credentials_storage.py
-│   └── user_credentials_validator.py
-│
-├── docs/            # Documentation and assets
+├── docs/                  # Documentation and assets
 │   ├── assets/
 │   │   ├── tic_tac_toe_demo.gif
 │   │   ├── tic_tac_toe_login.png
@@ -193,14 +206,12 @@ tic_tac_toe/
 │   ├── README_EN.md
 │   └── README_ES.md
 │
-├── tests/           # Tests and demo scripts
-│   └── main.py
-│
-├── LICENSE          # License file
-├── README.md        # Main README
-├── main.py          # Application entry point
-├── .gitignore       # Git ignore rules
-└── requirements.txt # Python dependencies (optional)
+└── tests/                 # Tests and demo scripts
+    ├── __init__.py        # Optional, for pytest package imports
+    ├── test_ai.py
+    ├── test_core.py
+    ├── test_gui.py
+    └── test_user_config.py
 
 ```
 

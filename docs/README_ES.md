@@ -147,60 +147,70 @@ Gestiona el login y la configuración de credenciales, asegurando identidades v�
 ## 🧱 Estructura del proyecto
 
 ```
-tic_tac_toe/
+TIC_TAC_TOE_GAME/          # Raíz del proyecto
 │
-├── ai/              #  Lógica de IA y ranking de jugadores
-│   ├── ai_player.py
-│   └── ranking_top_players.py
+├── LICENSE                # Archivo de licencia
+├── README.md              # README principal
+├── main.py                # Punto de entrada de la aplicación
+├── .gitignore             # Reglas de Git para ignorar archivos
+├── requirements.txt       # Dependencias de Python (opcional)
 │
-├── core/            # Lógica principal, helpers, enums, constantes y logging
-│   ├── enums.py
-│   ├── helper_classes.py
-│   ├── helper_methods.py
-│   ├── literals.py
-│   ├── log_game.py
-│   ├── logic_game.py
-│   └── paths.py
+├── tic_tac_toe/           # Paquete principal
+│   ├── __init__.py        # Convierte esta carpeta en un paquete de Python
+│   │
+│   ├── ai/                # Lógica de IA y ranking de jugadores
+│   │   ├── __init__.py
+│   │   ├── ai_player.py
+│   │   └── ranking_top_players.py
+│   │
+│   ├── core/              # Lógica principal, utilidades, enums, constantes, logging
+│   │   ├── __init__.py
+│   │   ├── enums.py
+│   │   ├── helper_classes.py
+│   │   ├── helper_methods.py
+│   │   ├── literals.py
+│   │   ├── log_game.py
+│   │   ├── logic_game.py
+│   │   └── paths.py
+│   │
+│   ├── data/              # Datos persistentes y registros
+│   │   ├── credentials.shlv
+│   │   ├── ranking_top_players.shlv
+│   │   └── logs/          # Carpeta para logs de la aplicación
+│   │
+│   ├── gui/               # Módulos de interfaz gráfica y ventana principal
+│   │   ├── __init__.py
+│   │   ├── board_game.py
+│   │   ├── buttons_panel.py
+│   │   ├── difficulty_panel.py
+│   │   ├── display_game.py
+│   │   └── tic_tac_toe_game.py
+│   │
+│   └── user_config/       # Gestión de credenciales de usuario
+│       ├── __init__.py
+│       ├── Animals.md
+│       ├── Colors.md
+│       ├── user_credentials_callbacks.py
+│       ├── user_credentials_gui.py
+│       ├── user_credentials_storage.py
+│       └── user_credentials_validator.py
 │
-├── data/            # Datos persistentes y logs
-│   ├── credentials.shlv
-│   ├── ranking_top_players.shlv
-│   └── logs/
-│
-├── gui/             # Módulos de GUI y ventana principal
-│   ├── board_game.py
-│   ├── buttons_panel.py
-│   ├── difficulty_panel.py
-│   ├── display_game.py
-│   └── tic_tac_toe_game.py
-│
-├── user_config/     # Gestión de credenciales de usuario
-│   ├── Animals.md
-│   ├── Colors.md
-│   ├── user_credentials_callbacks.py
-│   ├── user_credentials_gui.py
-│   ├── user_credentials_storage.py
-│   └── user_credentials_validator.py
-│
-├── docs/            # Documentación y recursos
-│   ├── assets/
+├── docs/                  # Documentación y recursos
+│   ├── assets/            # Archivos multimedia para la documentación
 │   │   ├── tic_tac_toe_demo.gif
 │   │   ├── tic_tac_toe_login.png
 │   │   ├── tic_tac_toe_game.png
 │   │   └── tic_tac_toe_vs_machine.png
 │   │
-│   ├── README_EN.md
-│   └── README_ES.md
+│   ├── README_EN.md       # Documentación en inglés
+│   └── README_ES.md       # Documentación en español
 │
-├── tests/           # Tests y scripts de demostración
-│   └── main.py
-│
-├── LICENSE          # Archivo de licencia
-├── README.md        # README principal
-├── main.py          # Punto de entrada de la aplicación
-├── .gitignore       # Reglas de archivos ignorados por Git
-└── requirements.txt # Dependencias de Python (opcional)
-
+└── tests/                 # Pruebas y scripts de demostración
+    ├── __init__.py        # Opcional, para imports relativos en los tests
+    ├── test_ai.py         # Tests de la lógica de IA
+    ├── test_core.py       # Tests de la lógica central
+    ├── test_gui.py        # Tests de la interfaz gráfica
+    └── test_user_config.py# Tests de la gestión de credenciales
 
 ```
 
