@@ -33,5 +33,7 @@ jobs:
       # 4️⃣ Run tests with correct PYTHONPATH
       - name: Run tests
         run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          # Ensure the repo root is in PYTHONPATH for imports
+          export PYTHONPATH=$(pwd)
+          # Run all tests in the tic_tac_toe/tests directory
           pytest tic_tac_toe/tests -v
