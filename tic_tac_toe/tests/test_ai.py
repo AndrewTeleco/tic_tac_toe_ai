@@ -29,8 +29,12 @@ class DummyDB(dict):
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
 
-patch_dbm = patch("dbm.open", return_value=DummyDB(fake_db_data))
-patch_dbm.start()
+@patch("tic_tac_toe.core.logic_game.dbm.open", return_value=DummyDB(fake_db_data))
+def test_aiplayer_initialization(mock_db):
+    moves, mapping = empty_board()
+    ai = AIPlayer(size_board=3, current_moves=moves, mapping_moves=mapping,
+                  winning_combos=winning_combos(3), level=Difficulty.EASY)
+    assert ai.level == Difficulty.EASY
 
 
 # ───────────────────────────────────────────────
