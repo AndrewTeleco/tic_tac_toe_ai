@@ -40,3 +40,4 @@ docs/Evaluations.md
 # Others
 *.bak
 *.tmp
+tests/notes.md
