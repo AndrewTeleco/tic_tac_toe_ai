@@ -1,5 +1,6 @@
 # tests/test_ai.py
 
+import pickle
 import pytest
 from colorama import Fore, Style, init
 init(autoreset=True)
@@ -10,6 +11,26 @@ from tic_tac_toe.core.enums import Difficulty
 from tic_tac_toe.core.helper_classes import Move, AIConfig
 from tic_tac_toe.core.literals import AI_MARK, PLAYER_MARK, UNDERSCORE, EMPTY
 from tic_tac_toe.core.logic_game import TicTacToeLogic, FIRST_USER, SECOND_USER
+
+# ───────────────────────────────────────────────
+# Dummy DB for Python 3.11+ shelve/dbm
+# ───────────────────────────────────────────────
+
+# Patch dbm.open to return DummyDB with correct keys/values
+fake_db_data = {
+    b"username_1": pickle.dumps({"usernames": "Alice", "animals": ["Cat"], "colors": ["Red"]}),
+    b"username_2": pickle.dumps({"usernames": "Bob", "animals": ["Dog"], "colors": ["Blue"]}),
+}
+
+class DummyDB(dict):
+    """Dict-like object with context manager interface for dbm/shelve."""
+    def __enter__(self):
+        return self
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+patch_dbm = patch("dbm.open", return_value=DummyDB(fake_db_data))
+patch_dbm.start()
 
 
 # ───────────────────────────────────────────────
