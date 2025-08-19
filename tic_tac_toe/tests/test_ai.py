@@ -258,7 +258,7 @@ def print_score_board(mapping, scores, best_move, cell_width=9):
 # Visual 3x3 VERY_HARD Boost Test
 # ───────────────────────────────────────────────
 
-def test_evaluate_ai_score_very_hard_3x3_boost_desempata_visual():
+def test_ai_score_3x3_very_hard_boost_visual():
     size = 3
     moves, mapping = empty_board(size=size)
 
@@ -289,7 +289,7 @@ def test_evaluate_ai_score_very_hard_3x3_boost_desempata_visual():
 # Visual 4x4 VERY_HARD Boost Test
 # ───────────────────────────────────────────────
 
-def test_evaluate_ai_score_very_hard_4x4_boost_desempata_visual():
+def test_ai_score_4x4_very_hard_boost_visual():
     size = 4
     moves, mapping = empty_board(size=size)
 
