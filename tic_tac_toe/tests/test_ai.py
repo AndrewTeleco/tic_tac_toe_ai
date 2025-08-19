@@ -1,6 +1,5 @@
 # tests/test_ai.py
 
-import pickle
 import pytest
 from colorama import Fore, Style, init
 init(autoreset=True)
@@ -26,8 +25,11 @@ dummy_credentials = DummyShelf({
     SECOND_USER: {"usernames": "Bob", "animals": ["Dog"], "colors": ["Blue"]},
 })
 
-patch_shelve = patch("tic_tac_toe.core.logic_game.shelve.open", return_value=dummy_credentials)
-patch_shelve.start()
+@pytest.fixture(autouse=True)
+def patch_shelve_open():
+    """Path shelve.open while all the tests are running."""
+    with patch("tic_tac_toe.core.logic_game.shelve.open", return_value=dummy_credentials):
+        yield
 
 # ───────────────────────────────────────────────
 # Helper Functions
