@@ -28,7 +28,7 @@ dummy_credentials = DummyShelf({
 @pytest.fixture(autouse=True)
 def patch_shelve_open():
     """Path shelve.open while all the tests are running."""
-    with patch("tic_tac_toe.core.logic_game.shelve.open", return_value=dummy_credentials):
+    with patch("tic_tac_toe.core.logic_game.TicTacToeLogic._load_credentials", return_value=dummy_credentials):
         yield
 
 # ───────────────────────────────────────────────
