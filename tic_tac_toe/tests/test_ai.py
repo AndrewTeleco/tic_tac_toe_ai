@@ -13,75 +13,43 @@ from tic_tac_toe.core.literals import AI_MARK, PLAYER_MARK, UNDERSCORE, EMPTY
 from tic_tac_toe.core.logic_game import TicTacToeLogic, FIRST_USER, SECOND_USER
 
 # ───────────────────────────────────────────────
-# Dummy DB for Python 3.11+ shelve/dbm
+# Patch shelve globally for all tests
 # ───────────────────────────────────────────────
 
-# Patch dbm.open to return DummyDB with correct keys/values
-fake_db_data = {
-    b"username_1": pickle.dumps({"usernames": "Alice", "animals": ["Cat"], "colors": ["Red"]}),
-    b"username_2": pickle.dumps({"usernames": "Bob", "animals": ["Dog"], "colors": ["Blue"]}),
-}
+class DummyShelf(dict):
+    """Dict-like object with context manager interface to replace shelve.open"""
+    def __enter__(self): return self
+    def __exit__(self, exc_type, exc_val, exc_tb): pass
 
-class DummyDB(dict):
-    """Dict-like object with context manager interface for dbm/shelve."""
-    def __enter__(self):
-        return self
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
+dummy_credentials = DummyShelf({
+    FIRST_USER: {"usernames": "Alice", "animals": ["Cat"], "colors": ["Red"]},
+    SECOND_USER: {"usernames": "Bob", "animals": ["Dog"], "colors": ["Blue"]},
+})
 
-@patch("tic_tac_toe.core.logic_game.dbm.open", return_value=DummyDB(fake_db_data))
-def test_aiplayer_initialization(mock_db):
-    moves, mapping = empty_board()
-    ai = AIPlayer(size_board=3, current_moves=moves, mapping_moves=mapping,
-                  winning_combos=winning_combos(3), level=Difficulty.EASY)
-    assert ai.level == Difficulty.EASY
-
+patch_shelve = patch("tic_tac_toe.core.logic_game.shelve.open", return_value=dummy_credentials)
+patch_shelve.start()
 
 # ───────────────────────────────────────────────
 # Helper Functions
 # ───────────────────────────────────────────────
 
-def winning_combos(size: int):
-    """
-    Returns the winning combinations for a board of given size.
-    Dummy credentials are injected manually to satisfy AIPlayer requirements.
-    """
-    logic = TicTacToeLogic(size)
-
-    # Dummy credentials for testing
-    dummy_creds = {
-        FIRST_USER: {"usernames": "Alice", "animals": ["Cat"], "colors": ["Red"]},
-        SECOND_USER: {"usernames": "Bob", "animals": ["Dog"], "colors": ["Blue"]},
-        "other_info": "dummy"
-    }
-
-    # Inject dummy players
-    logic.players = {}
-    for user_key in (FIRST_USER, SECOND_USER):
-        data = dummy_creds[user_key]
-        logic.players[user_key] = (data["usernames"], None)
-
-    # Setup current type of game and current players
-    logic._current_type_of_game = 0  # Player vs Player
-    logic._current_players = {
-        logic.players[FIRST_USER][0]: logic.players[FIRST_USER][1],
-        logic.players[SECOND_USER][0]: logic.players[SECOND_USER][1],
-    }
-
-    return logic._winning_combos  # attribute expected by AIPlayer
-
-
 def empty_board(size=3):
-    """
-    Returns an empty board and mapping for testing.
-    - moves: 2D list of Move objects
-    - mapping: 2D list of strings (visual board)
-    """
     moves = [[Move(r, c, animal=EMPTY) for c in range(size)] for r in range(size)]
     mapping = [[UNDERSCORE for _ in range(size)] for _ in range(size)]
     return moves, mapping
 
-
+def winning_combos(size: int):
+    logic = TicTacToeLogic(size)
+    # Inject dummy players manually
+    logic.players = {
+        FIRST_USER: ("Alice", None),
+        SECOND_USER: ("Bob", None),
+    }
+    logic._current_players = {
+        "Alice": None,
+        "Bob": None,
+    }
+    return logic._winning_combos
 
 # ───────────────────────────────────────────────
 # AIPlayer Initialization Tests
