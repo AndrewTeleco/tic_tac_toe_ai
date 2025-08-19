@@ -9,23 +9,54 @@ from tic_tac_toe.ai.ai_player import AIPlayer
 from tic_tac_toe.core.enums import Difficulty
 from tic_tac_toe.core.helper_classes import Move, AIConfig
 from tic_tac_toe.core.literals import AI_MARK, PLAYER_MARK, UNDERSCORE, EMPTY
-from tic_tac_toe.core.logic_game import TicTacToeLogic
+from tic_tac_toe.core.logic_game import TicTacToeLogic, FIRST_USER, SECOND_USER
+
 
 # ───────────────────────────────────────────────
 # Helper Functions
 # ───────────────────────────────────────────────
 
+def winning_combos(size: int):
+    """
+    Returns the winning combinations for a board of given size.
+    Dummy credentials are injected manually to satisfy AIPlayer requirements.
+    """
+    logic = TicTacToeLogic(size)
+
+    # Dummy credentials for testing
+    dummy_creds = {
+        FIRST_USER: {"usernames": "Alice", "animals": ["Cat"], "colors": ["Red"]},
+        SECOND_USER: {"usernames": "Bob", "animals": ["Dog"], "colors": ["Blue"]},
+        "other_info": "dummy"
+    }
+
+    # Inject dummy players
+    logic.players = {}
+    for user_key in (FIRST_USER, SECOND_USER):
+        data = dummy_creds[user_key]
+        logic.players[user_key] = (data["usernames"], None)
+
+    # Setup current type of game and current players
+    logic._current_type_of_game = 0  # Player vs Player
+    logic._current_players = {
+        logic.players[FIRST_USER][0]: logic.players[FIRST_USER][1],
+        logic.players[SECOND_USER][0]: logic.players[SECOND_USER][1],
+    }
+
+    return logic._winning_combos  # attribute expected by AIPlayer
+
+
 def empty_board(size=3):
-    """Create an empty board of Moves and visual mapping."""
+    """
+    Returns an empty board and mapping for testing.
+    - moves: 2D list of Move objects
+    - mapping: 2D list of strings (visual board)
+    """
     moves = [[Move(r, c, animal=EMPTY) for c in range(size)] for r in range(size)]
     mapping = [[UNDERSCORE for _ in range(size)] for _ in range(size)]
     return moves, mapping
 
 
-def winning_combos(size=3):
-    """Return winning combinations using TicTacToeLogic."""
-    logic = TicTacToeLogic(size)
-    return logic._winning_combos 
 
 # ───────────────────────────────────────────────
 # AIPlayer Initialization Tests
