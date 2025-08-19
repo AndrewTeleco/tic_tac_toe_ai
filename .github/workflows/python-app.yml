@@ -9,30 +9,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         python-version: [3.11]
 
     steps:
-      # 1️⃣ Checkout the repository
       - uses: actions/checkout@v3
 
-      # 2️⃣ Set up Python environment
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
-      # 3️⃣ Upgrade pip
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
 
-      # 4️⃣ Install dependencies
       - name: Install dependencies
         run: python -m pip install pytest colorama
 
-      # 5️⃣ Run tests
       - name: Run tests
         run: python -m pytest tic_tac_toe/tests -v
