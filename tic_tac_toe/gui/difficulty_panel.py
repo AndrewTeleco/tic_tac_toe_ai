@@ -94,7 +94,7 @@ class DifficultyPanel(tk.Frame):
         super().__init__(parent)
         self.controller = controller
         self._logic = logic_game
-        self._level: str = Difficulty.EASY.mode
+        self._level: str = Difficulty.EMPTY.mode
         self.parent = parent
         self._arc_start_angle = ARC_START_ANGLE  # reset per drawing
 
