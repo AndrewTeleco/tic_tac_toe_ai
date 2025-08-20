@@ -7,33 +7,42 @@ from unittest.mock import MagicMock
 
 # ----- Root windows -----
 class DummyTk:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 class DummyToplevel:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 # ----- Tk widgets -----
 class DummyListbox:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 # ----- ttk widgets -----
 class DummyFrame:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 class DummyButton:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 class DummyScale:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 class DummyLabel:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 class DummyCheckbutton:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 class DummyRadiobutton:
-    pass
+    def __init__(self, *args, **kwargs):
+        pass
 
 # -------------------- Fixture para mockear Tkinter globalmente --------------------
 @pytest.fixture(autouse=True)
@@ -47,7 +56,7 @@ def mock_tkinter(monkeypatch):
     import tkinter as tk
     monkeypatch.setattr(tk, "Tk", DummyTk)
     monkeypatch.setattr(tk, "Toplevel", DummyToplevel)
-    monkeypatch.setattr(tk, "Listbox", DummyListbox)
+    monkeypatch.setattr(tk, "Listbox", DummyListbox)  # Listbox está en tkinter, no ttk
 
     # ----- Patch messagebox -----
     try:
