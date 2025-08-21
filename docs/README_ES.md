@@ -342,7 +342,9 @@ Este proyecto incluye tests automatizados ubicados en la carpeta [`tests/`](../t
 
 Para ejecutarlos, simplemente usa:
 
-`pytest`
+```bash
+pytest
+```
 
 👉 Sobre conftest.py
 

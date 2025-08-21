@@ -128,24 +128,18 @@ class UserCredentialsCallbacks:
             listbox_name (str): Name of the listbox widget.
             *args: Event arguments (optional).
         """
-        event = args[0]
-        listbox = self.gui.widgets.get(listbox_name)
-
-        if not listbox: 
+        listbox_widget = self.gui.widgets.get(listbox_name)
+        if not listbox_widget:
             return
-        
-        widget = getattr(event, WIDGET, listbox)
+
         focused = self.gui.focus_get()
 
-        if (focused == listbox and
-            widget.size() > 0 and
-            widget.curselection()):
-            
-            index = widget.curselection()[0]
+        if focused == listbox_widget and listbox_widget.size() > 0 and listbox_widget.curselection():
+            index = listbox_widget.curselection()[0]
             self._change_settings_label(
                 listbox_name,
-                build_name(listbox_name.rstrip(LIST) , suffix=SELECT),
-                event=widget,
+                build_name(listbox_name.rstrip(LIST), suffix=SELECT),
+                event=listbox_widget,
                 index=index
             )
 
@@ -188,7 +182,7 @@ class UserCredentialsCallbacks:
             index (int, optional): Index of the selected item.
         """
         key = EMPTY
-        if event and index:
+        if index is not None and event is not None:
             key = event.get(index)
             self.gui.String_Vars[select].set(format_key(key, select, self.gui.animals))
         elif self.gui.widgets[listbox].get('0'):
@@ -197,7 +191,7 @@ class UserCredentialsCallbacks:
 
         self._update_current_user()
         
-        anml =  build_name(str(self.gui.current_user), prefix=ANIMAL, suffix=SELECT)
+        anml = build_name(str(self.gui.current_user), prefix=ANIMAL, suffix=SELECT)
         clr = build_name(str(self.gui.current_user), prefix=COLOR, suffix=SELECT)
         color = self.gui.String_Vars[clr].get()
 
@@ -249,7 +243,7 @@ class UserCredentialsCallbacks:
         Safely checks if the listbox exists before attempting to update it.
 
         Args:
-            name (str): The base widget name (e.g., 'animal1', 'color2').
+            name (str): The base widget name (e.g., 'animal_1', 'color_2').
         """
         listbox = build_name(name, suffix=LIST)
         if listbox not in self.gui.widgets:
@@ -260,7 +254,9 @@ class UserCredentialsCallbacks:
 
         self.gui.widgets[listbox].delete(0, tk.END)
 
-        entry_text = self.gui.String_Vars.get(name, tk.StringVar()).get().strip()
+        entry_text = self.gui.String_Vars[name]
+        entry_text = str(entry_text.get()).strip() if hasattr(entry_text, "get") else str(entry_text).strip()
+
         include_all = self.gui.Boolean_Vars.get(all_matches, tk.BooleanVar(value=False)).get()
 
         items = self.gui.items.get(name, [])

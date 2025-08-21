@@ -340,7 +340,9 @@ This project includes automated tests located in the [`tests/`](../tic_tac_toe/t
 
 To run them, simply execute:
 
-`pytest`
+```bash
+   pytest
+```
 
 👉 About conftest.py
 
