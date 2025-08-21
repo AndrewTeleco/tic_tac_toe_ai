@@ -186,6 +186,14 @@ TIC_TAC_TOE_GAME/          # Raíz del proyecto
 │   │   ├── display_game.py
 │   │   └── tic_tac_toe_game.py
 │   │
+│   ├── tests/                   # Scripts de tests y demos
+│   │   ├── __init__.py          # Opcional, para imports de paquetes con pytest
+│   │   ├── conftest.py          # Configura el entorno de tests y hace mock de Tkinter para tests de GUI
+│   │   ├── test_ai.py           # Tests de la lógica de IA
+│   │   ├── test_core.py         # Tests de la lógica central
+│   │   ├── test_gui.py          # Tests de la interfaz gráfica
+│   │   └── test_user_config.py  # Tests de la gestión de credenciales
+│   │
 │   └── user_config/       # Gestión de credenciales de usuario
 │       ├── __init__.py
 │       ├── Animals.md
@@ -195,22 +203,17 @@ TIC_TAC_TOE_GAME/          # Raíz del proyecto
 │       ├── user_credentials_storage.py
 │       └── user_credentials_validator.py
 │
-├── docs/                  # Documentación y recursos
-│   ├── assets/            # Archivos multimedia para la documentación
-│   │   ├── tic_tac_toe_demo.gif
-│   │   ├── tic_tac_toe_login.png
-│   │   ├── tic_tac_toe_game.png
-│   │   └── tic_tac_toe_vs_machine.png
-│   │
-│   ├── README_EN.md       # Documentación en inglés
-│   └── README_ES.md       # Documentación en español
-│
-└── tests/                 # Pruebas y scripts de demostración
-    ├── __init__.py        # Opcional, para imports relativos en los tests
-    ├── test_ai.py         # Tests de la lógica de IA
-    ├── test_core.py       # Tests de la lógica central
-    ├── test_gui.py        # Tests de la interfaz gráfica
-    └── test_user_config.py# Tests de la gestión de credenciales
+└──  docs/                        # Documentación y recursos
+      ├── assets/                 # Archivos multimedia para la documentación
+      │   ├── tic_tac_toe_demo.gif
+      │   ├── tic_tac_toe_login.png
+      │   ├── tic_tac_toe_game.png
+      │   └── tic_tac_toe_vs_machine.png
+      │
+      ├── README_EN.md       # Documentación en inglés
+      └── README_ES.md       # Documentación en español
+
+
 
 ```
 
@@ -332,6 +335,21 @@ python3 main.py
 ```
 
 💡En Windows, usa python en lugar de python3.
+
+### 🧪 Ejecutando Tests
+
+Este proyecto incluye tests automatizados ubicados en la carpeta [`tests/`](../tic_tac_toe/tests/).
+
+Para ejecutarlos, simplemente usa:
+
+`pytest`
+
+👉 Sobre conftest.py
+
+El archivo tests/conftest.py configura el entorno de tests para que los tests nunca dependan de una GUI real (tkinter).
+Los componentes de Tkinter están “mockeados”, por lo que no se abrirán ventanas.
+Los tests funcionan correctamente en cualquier entorno (Linux, macOS, Windows, GitHub Actions).
+Esto permite a los colaboradores escribir y ejecutar tests de la lógica de la GUI sin preocuparse por errores TclError ni por la ausencia de un display.
 
 ---
 

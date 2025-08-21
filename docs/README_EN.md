@@ -187,6 +187,14 @@ TIC_TAC_TOE_GAME/          # Root of the project
 │   │   ├── display_game.py
 │   │   └── tic_tac_toe_game.py
 │   │
+│   ├── tests/                    # Tests and demo scripts
+│   │   ├── __init__.py           # Optional, for pytest package imports
+│   │   ├── conftest.py           # Configures test environment and mocks Tkinter for GUI tests
+│   │   ├── test_ai.py            # Tests for AI logic
+│   │   ├── test_core.py          # Tests for core logic
+│   │   ├── test_gui.py           # Tests for the graphical user interface
+│   │   └── test_user_config.py   # Tests for user credentials management
+│   │
 │   └── user_config/       # User credentials management
 │       ├── __init__.py
 │       ├── Animals.md
@@ -196,22 +204,16 @@ TIC_TAC_TOE_GAME/          # Root of the project
 │       ├── user_credentials_storage.py
 │       └── user_credentials_validator.py
 │
-├── docs/                  # Documentation and assets
-│   ├── assets/
-│   │   ├── tic_tac_toe_demo.gif
-│   │   ├── tic_tac_toe_login.png
-│   │   ├── tic_tac_toe_game.png
-│   │   └── tic_tac_toe_vs_machine.png
-│   │
-│   ├── README_EN.md
-│   └── README_ES.md
-│
-└── tests/                 # Tests and demo scripts
-    ├── __init__.py        # Optional, for pytest package imports
-    ├── test_ai.py
-    ├── test_core.py
-    ├── test_gui.py
-    └── test_user_config.py
+└── docs/                  # Documentation and assets
+    ├── assets/
+    │   ├── tic_tac_toe_demo.gif
+    │   ├── tic_tac_toe_login.png
+    │   ├── tic_tac_toe_game.png
+    │   └── tic_tac_toe_vs_machine.png
+    │
+    ├── README_EN.md
+    └── README_ES.md
+
 
 ```
 
@@ -332,7 +334,23 @@ python3 main.py
 
 💡On Windows, replace python3 with python.
 
----
+### 🧪 Running Tests
+
+This project includes automated tests located in the [`tests/`](../tic_tac_toe/tests/) folder.
+
+To run them, simply execute:
+
+`pytest`
+
+👉 About conftest.py
+
+The file tests/conftest.py
+configures the test environment so that tests never depend on a real GUI (tkinter) being available.
+Tkinter components are mocked, so no windows will open.
+Tests run smoothly on any environment (Linux, macOS, Windows, GitHub Actions).
+This allows contributors to write and run tests for GUI logic without worrying about TclError or missing displays.
+
+## 👉 In short: anyone can clone the repo and run pytest out of the box, without special setup.
 
 ## 🧪 Project Status
 
