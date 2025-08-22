@@ -187,12 +187,12 @@ TIC_TAC_TOE_GAME/          # Raíz del proyecto
 │   │   └── tic_tac_toe_game.py
 │   │
 │   ├── tests/                   # Scripts de tests y demos
-│   │   ├── __init__.py          # Opcional, para imports de paquetes con pytest
+│   │   ├── __init__.py
 │   │   ├── conftest.py          # Configura el entorno de tests y hace mock de Tkinter para tests de GUI
-│   │   ├── test_ai.py           # Tests de la lógica de IA
-│   │   ├── test_core.py         # Tests de la lógica central
-│   │   ├── test_gui.py          # Tests de la interfaz gráfica
-│   │   └── test_user_config.py  # Tests de la gestión de credenciales
+│   │   ├── test_ai.py
+│   │   ├── test_core.py
+│   │   ├── test_gui.py
+│   │   └── test_user_config.py
 │   │
 │   └── user_config/       # Gestión de credenciales de usuario
 │       ├── __init__.py
@@ -346,6 +346,51 @@ Para ejecutarlos, simplemente usa:
 pytest
 ```
 
+### Cobertura y Tests Automatizados 🏆
+
+Este proyecto incluye múltiples tests para asegurar que cada módulo funciona correctamente y que la integración entre lógica, IA y GUI es estable.
+Resumen de tests principales:
+
+```
+--------------------------------------------------------------------------------------------------------------------------------------------------
+| Test File             | Qué Prueba                                             | Comentarios / Resumen                                         |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_ai.py`          | **AIPlayer**                                           |  - Alta cobertura de la IA: heurísticas, Minimax y            |
+|                       |                                                        |    decisiones en tableros 3x3 y 4x4.                          |
+|                       | - Inicialización y getters/setters                     |  - Uso de `shelve` para independencia del almacenamiento      |
+|                       | - `_get_remaining_moves`                               |                                                               |
+|                       | - Selección de movimiento (                            |                                                               |
+|                       |        `select_random_move`,                           |                                                               |
+|                       |        `select_medjum_move`,                           |                                                               |
+|                       |       `select_hard_move`,                              |                                                               |
+|                       |       `select_very_hard_move`                          |                                                               |
+|                       |     )                                                  |                                                               |
+|                       |                                                        |                                                               |
+|                       |                                                        |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_core.py`        | **TicTacToeLogic**                                     |  - Cubre la lógica central del juego.                         |
+|                       |                                                        |  - Maneja errores (`invalidMoveError`) y la interacción       |
+|                       |                                                        |    entre jugadores humanos y la máquina.                      |
+|                       | - Gestión de jugadores y turnos                        |                                                               |
+|                       | - Validación de movimientos                            |                                                               |
+|                       | - Estado del tablero                                   |                                                               |
+|                       | - Detección de victoria/empate                         |                                                               |
+|                       | - Actualización de puntuaciones y rankings             |                                                               |
+|                       | - Integración con IA                                   |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_gui.py`         | **TicTacToeGame**                                      |  - Evalúa integración GUI-lógica usando mocks.                |
+|                       |                                                        |  - Sin abrir ventanas reales.                                 |
+|                       | - Inicialización de GUI y construcción de tablero      |                                                               |
+|                       | - Propiedades de celdas                                |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_user_config.py` | **UserCredentialsGUI + Storage**                       |  - Mocks y FakeVars evitan abrir ventanas reales.             |
+|                       |                                                        |  - Evalúa integridad de datos, carga y persistencia.          |
+|                       | - Carga de recursos (animales/colores)                 |                                                               |
+|                       | - Almacenamiento persistente (`Store_data`, etc.)      |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+
+```
+
 👉 Sobre conftest.py
 
 El archivo tests/conftest.py configura el entorno de tests para que los tests nunca dependan de una GUI real (tkinter).
@@ -407,7 +452,7 @@ Eso me ayuda a seguir creando proyectos de calidad y es un buen apoyo para segui
 
 **Andrés David Aguilar Aguilar**  
 GitHub: [@AndrewTeleco](https://github.com/AndrewTeleco)
-📅 Julio 2025
+📅 Agosto 2025
 
 ---
 

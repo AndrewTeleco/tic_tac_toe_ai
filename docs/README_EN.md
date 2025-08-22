@@ -190,10 +190,10 @@ TIC_TAC_TOE_GAME/          # Root of the project
 │   ├── tests/                    # Tests and demo scripts
 │   │   ├── __init__.py           # Optional, for pytest package imports
 │   │   ├── conftest.py           # Configures test environment and mocks Tkinter for GUI tests
-│   │   ├── test_ai.py            # Tests for AI logic
-│   │   ├── test_core.py          # Tests for core logic
-│   │   ├── test_gui.py           # Tests for the graphical user interface
-│   │   └── test_user_config.py   # Tests for user credentials management
+│   │   ├── test_ai.py
+│   │   ├── test_core.py
+│   │   ├── test_gui.py
+│   │   └── test_user_config.py
 │   │
 │   └── user_config/       # User credentials management
 │       ├── __init__.py
@@ -344,6 +344,51 @@ To run them, simply execute:
    pytest
 ```
 
+### Coverage and Automated Tests 🏆
+
+This project includes multiple tests to ensure that each module works correctly and that the integration between logic, AI, and GUI is stable.  
+Summary of main tests:
+
+```
+--------------------------------------------------------------------------------------------------------------------------------------------------
+| Test File             | What It Tests                                          | Comments / Summary                                            |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_ai.py`          | **AIPlayer**                                           | - High AI coverage: heuristics, Minimax and                   |
+|                       |                                                        |   decisions on 3x3 and 4x4 boards.                            |
+|                       | - Initialization and getters/setters                   | - Uses `shelve` for storage independence                      |
+|                       | - `_get_remaining_moves`                               |                                                               |
+|                       | - Move selection (                                     |                                                               |
+|                       | `select_random_move`,                                  |                                                               |
+|                       | `select_medjum_move`,                                  |                                                               |
+|                       | `select_hard_move`,                                    |                                                               |
+|                       | `select_very_hard_move`                                |                                                               |
+|                       | )                                                      |                                                               |
+|                       |                                                        |                                                               |
+|                       |                                                        |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_core.py`        | **TicTacToeLogic**                                     | - Covers core game logic.                                     |
+|                       |                                                        | - Handles errors (`invalidMoveError`) and interactions        |
+|                       |                                                        |   between human players and the AI.                           |
+|                       | - Player and turn management                           |                                                               |
+|                       | - Move validation                                      |                                                               |
+|                       | - Board state                                          |                                                               |
+|                       | - Win/tie detection                                    |                                                               |
+|                       | - Score and ranking updates                            |                                                               |
+|                       | - AI integration                                       |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_gui.py`         | **TicTacToeGame**                                      | - Tests GUI-logic integration using mocks.                    |
+|                       |                                                        | - Does not open real windows.                                 |
+|                       | - GUI initialization and board construction            |                                                               |
+|                       | - Cell properties                                      |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| `test_user_config.py` | **UserCredentialsGUI + Storage**                       | - Mocks and FakeVars prevent opening real windows.            |
+|                       |                                                        | - Tests data integrity, loading, and persistence.             |
+|                       | - Resource loading (animals/colors)                    |                                                               |
+|                       | - Persistent storage (`Store_data`, etc.)              |                                                               |
+| --------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+
+```
+
 👉 About conftest.py
 
 The file tests/conftest.py
@@ -413,7 +458,7 @@ It helps me continue creating high-quality projects and motivates me to keep imp
 
 **Andrés David Aguilar Aguilar**  
 GitHub: [@AndrewTeleco](https://github.com/AndrewTeleco)
-📅 July 2025
+📅 August 2025
 
 ---
 
